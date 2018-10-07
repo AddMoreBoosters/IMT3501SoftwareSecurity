@@ -41,16 +41,16 @@ func (c Controller) makeHandler (fn func (http.ResponseWriter, *http.Request, st
 }
 
 func (c Controller) viewHandler(w http.ResponseWriter, r *http.Request, title string) {
-	err := c.model.LoadPage(title)
+	err := LoadPage(&c.model, title)
 	if err != nil {
-		http.Redirect(w, r, "/edit/"+title, http.StatusFound)
+		http.Redirect(w, r, "/edit/" + title, http.StatusFound)
 		return
 	}
 	c.view.RenderTemplate(w, "view", &c.model)
 }
 
 func (c Controller) editHandler(w http.ResponseWriter, r *http.Request, title string) {
-	err := c.model.LoadPage(title)
+	err := LoadPage(&c.model, title)
 	if err != nil {
 		http.NotFound(w, r)
 		return
@@ -60,10 +60,10 @@ func (c Controller) editHandler(w http.ResponseWriter, r *http.Request, title st
 
 func (c Controller) saveHandler(w http.ResponseWriter, r *http.Request, title string) {
 	body := r.FormValue("body")
-	err := c.model.Save(title, []byte(body))
+	err := Save(&c.model, title, []byte(body))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	http.Redirect(w, r, "/view/"+title, http.StatusFound)
+	http.Redirect(w, r, "/view/" + title, http.StatusFound)
 }

@@ -17,14 +17,14 @@ func (m Model) PutInDatabase() {
 
 }
 */
-func (m Model) Save(title string, body []byte) error {
+func Save(m * Model, title string, body []byte) error {
 	m.Title = title
 	m.Body = body
 	fileName := m.Title + ".txt"
 	return ioutil.WriteFile(fileName, m.Body, 0600)
 }
 
-func (m Model) LoadPage(title string) error {
+func LoadPage(m *Model, title string) error {
 	fileName := title + ".txt"
 	body, err := ioutil.ReadFile(fileName)
 	if err != nil {
