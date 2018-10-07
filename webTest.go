@@ -1,7 +1,7 @@
 package main 
 
 import (
-	"tasks/softwareSecurity/MVC"
+	"MVC"
 )
 
 func main() {

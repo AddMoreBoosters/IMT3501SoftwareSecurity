@@ -17,7 +17,7 @@ func (m Model) PutInDatabase() {
 
 }
 */
-func Save(m * Model, title string, body []byte) error {
+func Save(m *Model, title string, body []byte) error {
 	m.Title = title
 	m.Body = body
 	fileName := m.Title + ".txt"
