@@ -2,19 +2,33 @@ package MVC
 
 import (
 	"io/ioutil"
+	//"gopkg.in/mgo.v2"
+	//"gopkg.in/mgo.v2/bson"
 )
+
+//var mgoSession mgo.Session
 
 type Model struct {
 	Title string
 	Body []byte
 }
 /*
-func (m Model) GetFromDatabase() {
-
+type Category struct {
+	ID		bson.ObjectId	`json:"id" bson:"_id"`
+	Title 	string			`json:"title" bson:"title"`
 }
 
-func (m Model) PutInDatabase() {
+func ConnectToDB() {
+	s, err := mgo.Dial("mongodb://localhost")
 
+	if (err != nil) {
+		panic(err)
+	}
+
+	//	Consistency mode Strong has the least load distribution, but the most guarantees.
+	s.SetMode(mgo.Strong, true)
+
+	mgoSession = *s
 }
 */
 func Save(m *Model, title string, body []byte) error {

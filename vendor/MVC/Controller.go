@@ -43,7 +43,7 @@ func (c Controller) makeHandler (fn func (http.ResponseWriter, *http.Request, st
 func (c Controller) viewHandler(w http.ResponseWriter, r *http.Request, title string) {
 	err := LoadPage(&c.model, title)
 	if err != nil {
-		http.Redirect(w, r, "/edit/" + title, http.StatusFound)
+		http.NotFound(w, r)
 		return
 	}
 	c.view.RenderTemplate(w, "view", &c.model)
